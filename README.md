@@ -1,5 +1,11 @@
 # IPCheck
 
+[![Travis](https://api.travis-ci.org/gosquared/ipcheck.svg)](https://travis-ci.org/gosquared/ipcheck)
+[![Dependencies](https://david-dm.org/gosquared/ipcheck.svg)](https://david-dm.org/gosquared/ipcheck)
+
+[![NPM](https://nodei.co/npm/ipcheck.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/ipcheck)
+
+
 Quickly parses IP addresses, allowing them to be checked for CIDR matches.
 
 Converts IPv4 to IPv6 to keep the process seamless and allow transitional IPs.
