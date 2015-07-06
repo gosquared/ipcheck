@@ -1,0 +1,36 @@
+{
+  "name": "ipcheck",
+  "version": "0.0.1",
+  "description": "Super-efficient module to parse and check if an IP address is in a CIDR block. IPv4 and IPv6 supported.",
+  "main": "ipcheck.js",
+  "scripts": {
+    "test": "mocha test/test.js",
+    "benchmark": "node benchmark/benchmark.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gosquared/ipcheck.git"
+  },
+  "keywords": [
+    "ip",
+    "ipv6",
+    "ipv4",
+    "cidr"
+  ],
+  "author": "Simon Tabor",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gosquared/ipcheck/issues"
+  },
+  "homepage": "https://github.com/gosquared/ipcheck",
+  "dependencies": {
+    "ipaddr.js": "^1.0.1"
+  },
+  "devDependencies": {
+    "benchmark": "^1.0.0",
+    "ip-address": "^4.0.0",
+    "microtime": "^1.4.2",
+    "mocha": "^2.2.5",
+    "should": "^7.0.1"
+  }
+}
