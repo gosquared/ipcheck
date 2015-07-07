@@ -2,6 +2,7 @@
 
 [![Travis](https://api.travis-ci.org/gosquared/ipcheck.svg)](https://travis-ci.org/gosquared/ipcheck)
 [![Dependencies](https://david-dm.org/gosquared/ipcheck.svg)](https://david-dm.org/gosquared/ipcheck)
+[![Join the chat at https://gitter.im/gosquared/ipcheck](https://img.shields.io/badge/gitter-join%20chat-blue.svg)](https://gitter.im/gosquared/ipcheck)
 
 [![NPM](https://nodei.co/npm/ipcheck.png?downloads=true&downloadRank=true&stars=true)](https://www.npmjs.com/package/ipcheck)
 
