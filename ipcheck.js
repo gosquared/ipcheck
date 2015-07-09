@@ -7,6 +7,7 @@ var ArrayConstructor = typeof Uint8Array === 'undefined' ?
     for (var i = 0; i < arguments.length; i++) {
       arr[i] = arguments[i];
     }
+
     return arr;
   };
 
@@ -63,7 +64,6 @@ IPCheck.prototype.parse = function() {
   self.mask = self.mask || (self.ipv === 4 ? 32 : 128);
 
   if (self.ipv === 4) {
-    self.parseIPv4(ip);
     // difference between ipv4 and ipv6 masks
     self.mask += 96;
   }
@@ -73,11 +73,18 @@ IPCheck.prototype.parse = function() {
     return;
   }
 
-  self.parseIPv6(ip);
+  if(self.ipv === 4){
+    self.parseIPv4(ip);
+  }else{
+    self.parseIPv6(ip);
+  }
 };
 
 IPCheck.prototype.parseIPv4 = function(ip) {
   var self = this;
+
+  // ipv4 addresses live under ::ffff:0:0
+  self.address[10] = self.address[11] = 0xff;
 
   var octets = ip.split('.');
   for (var i = 0; i < 4; i++) {

@@ -36,6 +36,26 @@ describe('IPCheck', function() {
       assert.strictEqual(IPCheck('FE80:0000:0000:0000:0202:B3FF:FE1E:8329').address.length, 16);
     });
 
+    it('should correctly parse addresses', function(){
+
+      function check(str, expected) {
+        var ip = IPCheck(str);
+
+        assert.strictEqual([].join.call(ip.address, ' '), expected.join(' '));
+      }
+
+      check('::', [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]);
+      check('::1', [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1 ]);
+      check('0:ffff::', [ 0, 0, 0xff, 0xff, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]);
+      check('ffff::ffff', [ 0xff, 0xff, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xff ]);
+      check('1234:5678:9abc:def0:0fed:cba9:8765:4321', [ 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x0f, 0xed, 0xcb, 0xa9, 0x87, 0x65, 0x43, 0x21 ]);
+
+      check('0.0.0.0', [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xff, 0, 0, 0, 0 ]);
+      check('123.234.123.234', [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xff, 123, 234, 123, 234 ]);
+
+      check('::ffff:1.2.3.4', [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0xff, 0xff, 1, 2, 3, 4 ]);
+    });
+
     it('should parse CIDR notation', function() {
       assert.strictEqual(IPCheck('192.168.0.0/32').mask, 32 + 96);
       assert.strictEqual(IPCheck('FE80:0000:0000:0000:0202:B3FF:FE1E:8329/110').mask, 110);
