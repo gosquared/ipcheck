@@ -4,18 +4,19 @@ var ArrayConstructor = typeof Uint8Array === 'undefined' ?
   Array :
   function() {
     var arr = new Uint8Array(arguments.length);
-    for(var i = 0; i < arguments.length; i++) {
+    for (var i = 0; i < arguments.length; i++) {
       arr[i] = arguments[i];
     }
     return arr;
   };
 
 
-function compare(addr1, addr2, mask){
+function compare(addr1, addr2, mask) {
   var i = 0;
 
-  while(mask >= 8){
+  while (mask >= 8) {
     if(addr1[i] !== addr2[i]) return false;
+
     i++;
     mask -= 8;
   }
@@ -28,7 +29,7 @@ function compare(addr1, addr2, mask){
 var IPCheck = module.exports = function(input) {
   var self = this;
 
-  if(!(self instanceof IPCheck)){
+  if (!(self instanceof IPCheck)) {
     return new IPCheck(input);
   }
 
@@ -67,7 +68,7 @@ IPCheck.prototype.parse = function() {
     self.mask += 96;
   }
 
-  if(self.mask < 0 || self.mask > 128){
+  if (self.mask < 0 || self.mask > 128) {
     self.valid = false;
     return;
   }
@@ -97,7 +98,7 @@ IPCheck.prototype.parseIPv6 = function(ip) {
   }
 
   var bits = ip.split(':');
-  if(bits.length < 8){
+  if (bits.length < 8) {
     ip = ip.replace('::', Array(11 - bits.length).join(':'));
     bits = ip.split(':');
   }
