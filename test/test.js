@@ -39,9 +39,7 @@ describe('IPCheck', function() {
     it('should correctly parse addresses', function(){
 
       function check(str, expected) {
-        var ip = IPCheck(str);
-
-        assert.strictEqual([].join.call(ip.address, ' '), expected.join(' '));
+        assert.deepEqual(IPCheck(str).address, expected);
       }
 
       check('::', [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ]);

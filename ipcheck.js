@@ -1,17 +1,5 @@
 var net = require('net');
 
-var ArrayConstructor = typeof Uint8Array === 'undefined' ?
-  Array :
-  function() {
-    var arr = new Uint8Array(arguments.length);
-    for (var i = 0; i < arguments.length; i++) {
-      arr[i] = arguments[i];
-    }
-
-    return arr;
-  };
-
-
 function compare(addr1, addr2, mask) {
   var i = 0;
 
@@ -35,7 +23,6 @@ var IPCheck = module.exports = function(input) {
   }
 
   self.input = input;
-  self.address = ArrayConstructor(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
   self.parse();
 };
 
@@ -72,6 +59,8 @@ IPCheck.prototype.parse = function() {
     self.valid = false;
     return;
   }
+
+  self.address = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
   if(self.ipv === 4){
     self.parseIPv4(ip);
