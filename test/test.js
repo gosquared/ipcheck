@@ -32,8 +32,8 @@ describe('IPCheck', function() {
     });
 
     it('should treat everything as IPv6 in ipaddr.js', function() {
-      assert.equal(IPCheck('192.168.0.0').parsed.kind(), 'ipv6');
-      assert.equal(IPCheck('FE80:0000:0000:0000:0202:B3FF:FE1E:8329').parsed.kind(), 'ipv6');
+      assert.strictEqual(IPCheck('192.168.0.0').address.length, 16);
+      assert.strictEqual(IPCheck('FE80:0000:0000:0000:0202:B3FF:FE1E:8329').address.length, 16);
     });
 
     it('should parse CIDR notation', function() {

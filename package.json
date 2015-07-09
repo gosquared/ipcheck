@@ -23,9 +23,6 @@
     "url": "https://github.com/gosquared/ipcheck/issues"
   },
   "homepage": "https://github.com/gosquared/ipcheck",
-  "dependencies": {
-    "ipaddr.js": "^1.0.1"
-  },
   "devDependencies": {
     "benchmark": "^1.0.0",
     "ip-address": "^4.0.0",
