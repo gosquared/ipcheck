@@ -1,20 +1,5 @@
 var net = require('net');
 
-function compare(addr1, addr2, mask) {
-  var i = 0;
-
-  while (mask >= 8) {
-    if(addr1[i] !== addr2[i]) return false;
-
-    i++;
-    mask -= 8;
-  }
-
-  var shift = 8 - mask;
-  return (addr1[i] >>> shift) === (addr2[i] >>> shift);
-}
-
-
 var IPCheck = module.exports = function(input) {
   var self = this;
 
@@ -107,14 +92,24 @@ IPCheck.prototype.parseIPv6 = function(ip) {
   }
 };
 
-
 IPCheck.prototype.match = function(cidr) {
   var self = this;
 
   if (!(cidr instanceof IPCheck)) cidr = new IPCheck(cidr);
   if (!self.valid || !cidr.valid) return false;
 
-  return compare(self.address, cidr.address, cidr.mask);
+  var mask = cidr.mask;
+  var i = 0;
+
+  while (mask >= 8) {
+    if (self.address[i] !== cidr.address[i]) return false;
+
+    i++;
+    mask -= 8;
+  }
+
+  var shift = 8 - mask;
+  return (self.address[i] >>> shift) === (cidr.address[i] >>> shift);
 };
 
 
