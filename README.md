@@ -15,8 +15,6 @@ Converts IPv4 to IPv6 to keep the process seamless and allow transitional IPs.
 
 `npm install ipcheck --save`
 
-Currently depends heavily on [`ipaddr.js`](https://github.com/whitequark/ipaddr.js).
-
 ## Usage
 
 ### Quick
