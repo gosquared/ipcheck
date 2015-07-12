@@ -48,7 +48,7 @@ IPCheck.prototype.parse = function() {
   if (!self.valid) return;
 
   // default mask = 32 for ipv4 and 128 for ipv6
-  self.mask = self.mask || (self.ipv === 4 ? 32 : 128);
+  if (self.mask === null) self.mask = self.ipv === 4 ? 32 : 128;
 
   if (self.ipv === 4) {
     // difference between ipv4 and ipv6 masks
@@ -112,7 +112,7 @@ IPCheck.prototype.match = function(cidr) {
   var self = this;
 
   if (!(cidr instanceof IPCheck)) cidr = new IPCheck(cidr);
-  if (!self.valid || !cidr.valid || !cidr.mask) return false;
+  if (!self.valid || !cidr.valid) return false;
 
   return compare(self.address, cidr.address, cidr.mask);
 };

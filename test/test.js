@@ -63,6 +63,11 @@ describe('IPCheck', function() {
       assert.strictEqual(IPCheck('192.168.0.0').mask, 32 + 96);
       assert.strictEqual(IPCheck('FE80:0000:0000:0000:0202:B3FF:FE1E:8329').mask, 128);
     });
+
+    it('shouldn\'t allow non-numeric masks', function() {
+      assert.strictEqual(IPCheck('192.168.0.0/x').valid, false);
+      assert.strictEqual(IPCheck('::1/true').valid, false);
+    });
   });
 
   describe('#match()', function() {
@@ -70,6 +75,8 @@ describe('IPCheck', function() {
       assert.strictEqual(IPCheck('82.5.44.120').match(IPCheck('82.5.44.120/32')), true);
       assert.strictEqual(IPCheck('82.5.44.0').match(IPCheck('82.5.44.120/24')), true);
       assert.strictEqual(IPCheck('82.5.44.255').match(IPCheck('82.5.44.120/24')), true);
+      assert.strictEqual(IPCheck('192.168.0.1').match(IPCheck('0.0.0.0/0')), true);
+      assert.strictEqual(IPCheck('1234:5678:9abc:def0:0fed:cba9:8765:4321').match(IPCheck('0::0/0')), true);
     });
 
     it('shouldn\'t validate an IP outside a CIDR block', function() {
@@ -93,4 +100,4 @@ describe('IPCheck', function() {
     });
 
   });
-})
+});
